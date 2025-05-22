@@ -8,11 +8,15 @@ import { Login } from './Login';
 import { Register } from './Register';
 import { Profile } from './Profile';
 import { SearchBar } from './SearchBar';
+import { Game } from '../data/games';
+
 interface NavbarProps {
   onCartClick: () => void;
+  onSearchResults?: (results: Game[]) => void;
+  searchBarKey?: number;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onCartClick, onSearchResults, searchBarKey }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartItems } = useCart();
   const { user, logout } = useAuth();
@@ -59,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
           </div>
 
           <div className="mx-4 hidden md:block flex-1">
-            <SearchBar />
+            <SearchBar onSearchResults={onSearchResults} key={searchBarKey} />
           </div>
 
           <div className="flex items-center space-x-4">
@@ -93,7 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick }) => {
       {isMenuOpen && (
         <div className="md:hidden bg-gray-800 px-4 py-2">
           <div className="mb-4">
-            <SearchBar />
+            <SearchBar onSearchResults={onSearchResults} key={searchBarKey} />
           </div>
           <div className="flex flex-col space-y-2">
             <Link to="/" className="text-gray-300 hover:text-white py-2">Inicio</Link>

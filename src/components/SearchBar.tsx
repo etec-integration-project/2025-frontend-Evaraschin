@@ -4,7 +4,11 @@ import { games, Game } from '../data/games';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  onSearchResults?: (results: Game[]) => void;
+}
+
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState<Game[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -39,8 +43,18 @@ export const SearchBar = () => {
     setIsOpen(true);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && onSearchResults) {
+      const filtered = games.filter(game =>
+        game.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      onSearchResults(filtered);
+      setIsOpen(false);
+    }
+  };
+
   const handleBuyNow = (game: Game) => {
-    addToCart(game);
+    addToCart({ ...game, id: String(game.id) });
     navigate('/checkout');
     setIsOpen(false);
     setSearchTerm('');
@@ -48,7 +62,7 @@ export const SearchBar = () => {
 
   const handleAddToCart = (game: Game, event: React.MouseEvent) => {
     event.stopPropagation();
-    addToCart(game);
+    addToCart({ ...game, id: String(game.id) });
     setIsOpen(false);
     setSearchTerm('');
   };
@@ -60,6 +74,7 @@ export const SearchBar = () => {
           type="text"
           value={searchTerm}
           onChange={(e) => handleSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Buscar juegos..."
           className="w-full bg-gray-700 text-white pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
@@ -115,4 +130,4 @@ export const SearchBar = () => {
       )}
     </div>
   );
-}; 
+};

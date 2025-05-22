@@ -34,5 +34,3 @@ services:
       - MYSQL_PASSWORD=password
     volumes:
       - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-# Eliminamos la sección de volumes global ya que no la necesitamos por ahora 
