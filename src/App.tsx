@@ -13,6 +13,16 @@ import { AuthProvider } from './context/AuthContext';
 import { SearchBar } from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 import { Game } from './data/games';
+import CallOfDutyBO6Page from './components/CallOfDutyBO6Page';
+import RedDeadRedemption2Page from './components/RedDeadRedemption2Page';
+import GrandTheftAutoVPage from './components/GrandTheftAutoVPage';
+import FIFA25Page from './components/FIFA25Page';
+import Cyberpunk2077Page from './components/Cyberpunk2077Page';
+import TheLastOfUsPartIIPage from './components/TheLastOfUsPartIIPage';
+import EldenRingPage from './components/EldenRingPage';
+import AssassinsCreedValhallaPage from './components/AssassinsCreedValhallaPage';
+import ResidentEvil4RemakePage from './components/ResidentEvil4RemakePage';
+import GodOfWarRagnarokPage from './components/GodOfWarRagnarokPage';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -49,6 +59,16 @@ function App() {
                   <Route path="/auth" element={<AuthPage />} />
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/wishlist" element={<WishList />} />
+                  <Route path="/call-of-duty-black-ops-6" element={<CallOfDutyBO6Page />} />
+                  <Route path="/red-dead-redemption-2" element={<RedDeadRedemption2Page />} />
+                  <Route path="/grand-theft-auto-v" element={<GrandTheftAutoVPage />} />
+                  <Route path="/fifa-25" element={<FIFA25Page />} />
+                  <Route path="/cyberpunk-2077" element={<Cyberpunk2077Page />} />
+                  <Route path="/the-last-of-us-part-ii" element={<TheLastOfUsPartIIPage />} />
+                  <Route path="/elden-ring" element={<EldenRingPage />} />
+                  <Route path="/assassins-creed-valhalla" element={<AssassinsCreedValhallaPage />} />
+                  <Route path="/resident-evil-4-remake" element={<ResidentEvil4RemakePage />} />
+                  <Route path="/god-of-war-ragnarok" element={<GodOfWarRagnarokPage />} />
                 </Routes>
               )}
               <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

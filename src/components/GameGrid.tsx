@@ -39,7 +39,35 @@ const GameGrid: React.FC = () => {
       <h2 className="text-2xl font-bold mb-6">Todos los Juegos</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {games.map((game) => (
-          <div key={game.id} className="bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
+          <div
+            key={game.id}
+            className="bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+            onClick={() => {
+              if (game.title === "Call of Duty: Black Ops 6") {
+                navigate("/call-of-duty-black-ops-6");
+              } else if (game.title === "Red Dead Redemption 2") {
+                navigate("/red-dead-redemption-2");
+              } else if (game.title === "Grand Theft Auto V") {
+                navigate("/grand-theft-auto-v");
+              } else if (game.title === "FIFA 25") {
+                navigate("/fifa-25");
+              } else if (game.title === "Cyberpunk 2077") {
+                navigate("/cyberpunk-2077");
+              } else if (game.title === "The Last of Us Part II") {
+                navigate("/the-last-of-us-part-ii");
+              } else if (game.title === "Elden Ring") {
+                navigate("/elden-ring");
+              } else if (game.title === "Assassin's Creed Valhalla") {
+                navigate("/assassins-creed-valhalla");
+              } else if (game.title === "Resident Evil 4 Remake") {
+                navigate("/resident-evil-4-remake");
+              } else if (game.title === "God of War Ragnarök") {
+                navigate("/god-of-war-ragnarok");
+              } else {
+                navigate(`/game/${game.id}`);
+              }
+            }}
+          >
             <div className="relative">
               <img
                 src={game.image}
@@ -54,7 +82,7 @@ const GameGrid: React.FC = () => {
               )}
               <div className="absolute top-4 right-4 flex space-x-2">
                 <button
-                  onClick={() => toggleCart(game)}
+                  onClick={e => { e.stopPropagation(); toggleCart(game); }}
                   className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
                 >
                   <ShoppingCart 
@@ -63,7 +91,7 @@ const GameGrid: React.FC = () => {
                   />
                 </button>
                 <button
-                  onClick={() => toggleWishList(game)}
+                  onClick={e => { e.stopPropagation(); toggleWishList(game); }}
                   className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
                 >
                   <Heart 
@@ -99,7 +127,7 @@ const GameGrid: React.FC = () => {
                   )}
                 </div>
                 <button
-                  onClick={() => handleBuyNow(game)}
+                  onClick={e => { e.stopPropagation(); handleBuyNow(game); }}
                   className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors"
                 >
                   Comprar Ahora
